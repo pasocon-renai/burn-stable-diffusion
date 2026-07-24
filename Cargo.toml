@@ -1,0 +1,15 @@
+[package]
+name = "stablediffusion"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+burn = {version = "0.21.0", features=["wgpu", "flex"]}
+serde = {version = "1.0.171", features = ["std", "derive"]}
+npy = "0.4.0"
+num-traits = "0.2.15"
+rust_tokenizers = "8.1.0"
+regex = "1.9.1"
+image = "0.24.6"
