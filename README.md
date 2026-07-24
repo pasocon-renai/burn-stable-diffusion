@@ -4,8 +4,6 @@ Stable-Diffusion-Burn is a Rust-based project which ports the V1 stable diffusio
 
 ## How To Use
 
-### Step 0: Install libtorch v2.4.1
-
 ### Step 1: Download the Model and Set Environment Variables
 
 Start by downloading the SDv1-4 model provided on HuggingFace.
@@ -16,21 +14,12 @@ wget https://huggingface.co/Gadersd/Stable-Diffusion-Burn/resolve/main/SDv1-4.mp
 
 ### Step 2: Run the Sample Binary
 
-Invoke the sample binary provided in the rust code. By default, torch is used. The WGPU backend is unstable for SD but may work well in the future as burn-wpu is optimized.
-
 ```bash
 # torch (at least 6 GB VRAM, possibly less)
-# Arguments: <model_type(burn or dump)> <model_name> <unconditional_guidance_scale> <n_diffusion_steps> <prompt> <output_image_name> [cuda, mps, cpu]
+# Arguments: <model_type(burn or dump)> <model_name> <unconditional_guidance_scale> <n_diffusion_steps> <prompt> <output_image_name> [cpu, gpu]
 
-# Cuda
-cargo run --release --bin sample burn SDv1-4 7.5 20 "An ancient mossy stone." img cuda
+cargo run --release --bin sample burn SDv1-4 7.5 20 "An ancient mossy stone." img cpu
 
-# Mps(Mac)
-cargo run --release --bin sample burn SDv1-4 7.5 20 "An ancient mossy stone." img mps
-
-# wgpu (UNSTABLE)
-# Arguments: <model_type(burn or dump)> <model> <unconditional_guidance_scale> <n_diffusion_steps> <prompt> <output_image>
-cargo run --release --features wgpu-backend --bin sample burn SDv1-4 7.5 20 "An ancient mossy stone." img
 ```
 
 This command will generate an image according to the provided prompt, which will be saved as 'img0.png'.
