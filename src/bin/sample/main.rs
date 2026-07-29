@@ -60,7 +60,7 @@ fn _main<B:Backend>(model_type:&str,model_name:&str,unconditional_guidance_scale
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() != 7 && args.len() != 8 {
-        eprintln!("Usage: {} <model_type(burn or dump)> <model_name> <unconditional_guidance_scale> <n_diffusion_steps> <prompt> <output_image_name> [device(cuda, mps, cpu)]", args[0]);
+        eprintln!("Usage: {} <model_type(burn or dump)> <model_name> <unconditional_guidance_scale> <n_diffusion_steps> <prompt> <output_image_name> [device(cpu, gpu)]", args[0]);
         process::exit(1);
     }
 
@@ -81,9 +81,9 @@ fn main() {
     let device_arg = if args.len() == 8 { Some(&args[7]) } else { None };
 
     if let Some(dev_str)=device_arg&&dev_str=="cpu"{
-        _main::<burn::backend::Flex>(model_type,model_name,unconditional_guidance_scale,n_steps,prompt,output_image_name);
+		_main::<burn::backend::Flex>(model_type,model_name,unconditional_guidance_scale,n_steps,prompt,output_image_name);
     }else{
-        _main::<burn::backend::Wgpu>(model_type,model_name,unconditional_guidance_scale,n_steps,prompt,output_image_name);
+		_main::<burn::backend::Wgpu>(model_type,model_name,unconditional_guidance_scale,n_steps,prompt,output_image_name);
     }
 }
 
